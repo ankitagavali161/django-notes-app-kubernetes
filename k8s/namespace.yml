@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mynotes-app-namespace
+  annotations:
+    description: "Namespace for mynotes-app"
+    team: "devops"
+    environment: "development"
+  labels:
+    name: mynotes-app-namespace
+    app: mynotes-app
+    env: dev

@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mynotes-app-ingress
+  namespace: mynotes-app-namespace
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: 127.0.0.1
+    http:
+      paths:
+      # 🏠 Home sweet home - using the "admin" port (4545)
+      - path: /home
+        pathType: Prefix
+        backend:
+          service:
+            name: mynotes-app-service
+            port:
+              number: 4545
+      # 🚀 Main app - using the "api" port (4899) 
+      - path: /app
+        pathType: Prefix
+        backend:
+          service:
+            name: mynotes-app-service
+            port:
+              number: 4899
+      # 🎯 Default catch-all - using the main port (8000)
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mynotes-app-service
+            port:
+              number: 4141

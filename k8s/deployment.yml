@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mynotes-app-deployment
+  namespace: mynotes-app-namespace
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mynotes-app
+  template:
+    metadata:
+      labels:
+        app: mynotes-app
+    spec:
+      containers:
+        - name: mynotes-app
+          image: anks123/my-notes-app:latest
+          ports:
+            - containerPort: 8000

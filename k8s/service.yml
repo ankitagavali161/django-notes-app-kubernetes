@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mynotes-app-service
+  namespace: mynotes-app-namespace
+spec:
+  selector:
+    app: mynotes-app
+  type: ClusterIP
+  ports:
+    - name: main-app
+      port: 4141
+      targetPort: 8000
+      protocol: TCP
+    - name: admin-port
+      port: 4545
+      targetPort: 8000
+      protocol: TCP
+    - name: api-port
+      port: 4899
+      targetPort: 8000
+      protocol: TCP
